@@ -20,11 +20,7 @@
             this.data('farbtastic', instance);
         }
 
-        if (options && options.returnInstance) {
-            return instance; // Ensure this returns the Farbtastic object
-        } else {
-            return this; // Normal jQuery chaining
-        }
+        return instance; // Ensure this returns the Farbtastic object
     };
 
     $.farbtastic = function(container, options) {
@@ -59,16 +55,6 @@
             // Reset color
             fb.color = null;
 
-            // Get a random color (equiprobable in RGB space)
-            fb.getRandomColor = function() {
-                var letters = '0123456789abcdef';
-                var color = '#';
-                for (var i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
-                return color;
-            }
-
             // Bind callback or elements
             if (typeof callback == 'function') {
                 fb.callback = callback;
@@ -90,6 +76,8 @@
         /**
          * Change color with HTML syntax #123456
          */
+
+
         fb.setColor = function(color) {
             var unpackxx = fb.unpackxx(color);
             if (fb.color != color && unpackxx) {
@@ -99,6 +87,16 @@
                 fb.updateDisplay();
             }
             return this;
+        }
+
+        // Get a random color (equiprobable in RGB space)
+        fb.getRandomColor = function() {
+            var letters = '0123456789abcdef';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
 
         /**
@@ -127,7 +125,6 @@
             $(container)
                 .html(
                     '<div class="farbtastic" style="position: relative">' +
-                    '<div class="farbtastic-solid"></div>' +
                     '<canvas class="farbtastic-mask"></canvas>' +
                     '<canvas class="farbtastic-overlay"></canvas>' +
                     '</div>'
@@ -141,12 +138,7 @@
             fb.square = Math.floor((fb.radius - options.wheelWidth / 2) * 0.7) - 1;
             fb.mid = Math.floor(options.width / 2);
             fb.markerSize = options.wheelWidth * 0.3;
-            fb.solidFill = $('.farbtastic-solid', container).css({
-                width: fb.square * 2 - 1,
-                height: fb.square * 2 - 1,
-                left: fb.mid - fb.square,
-                top: fb.mid - fb.square
-            });
+
 
             // Set up drawing context.
             fb.cnvMask = $('.farbtastic-mask', container);
@@ -157,9 +149,11 @@
             fb.ctxOverlay.translate(fb.mid, fb.mid);
 
             // Draw widget base layers.
+            fb.setColor(fb.getRandomColor());
             fb.drawCircle();
             fb.drawMask();
         }
+
 
         /**
          * Draw the color wheel.
@@ -254,6 +248,8 @@
                 });
 
                 ctx.putImageData(frame, 0, 0);
+                fb.ctxMask.fillStyle = fb.pack(fb.HSLToRGB([fb.hsl[0], 1, 0.5]));
+                fb.ctxMask.fillRect(-sq, -sq, sq * 2, sq * 2);
                 fb.ctxMask.drawImage(buffer, 0, 0, sz + 1, sz + 1, -sq, -sq, sq * 2, sq * 2);
             }
             // Method #3: vertical DXImageTransform gradient strips (IE).
@@ -357,7 +353,7 @@
             fb.invert = (fb.rgb[0] * 0.3 + fb.rgb[1] * .59 + fb.rgb[2] * .11) <= 0.6;
 
             // Update the solid background fill.
-            fb.solidFill.css('backgroundColor', fb.pack(fb.HSLToRGB([fb.hsl[0], 1, 0.5])));
+            fb.drawMask();
 
             // Draw markers
             fb.drawMarkers();
