@@ -13,15 +13,17 @@
     var twist = Math.random();
 
     $.fn.farbtastic = function(options) {
-        var instance = this.data('farbtastic');
+    var instance = this.data('farbtastic');
+    console.log('Retrieved instance: ', instance); // Debug log
 
-        if (!instance) {
-            instance = new $.farbtastic(this, options);
-            this.data('farbtastic', instance);
-        }
+    if (!instance) {
+        instance = new $.farbtastic(this, options);
+        this.data('farbtastic', instance);
+        console.log('Created new instance: ', instance); // Debug log
+    }
 
-        return instance; // Ensure this returns the Farbtastic object
-    };
+    return instance; // Should return the instance
+};
 
     $.farbtastic = function(container, options) {
         var container = $(container).get(0); // Ensure we're working with a DOM element
@@ -533,8 +535,6 @@
         if (options.callback) {
             fb.linkTo(options.callback);
         }
-        // Set to random.
-        if (!fb.color) fb.setColor(fb.getRandomColor());
     }
 
 })(jQuery);
