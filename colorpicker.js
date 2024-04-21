@@ -1,3 +1,4 @@
+
 // This code is a modification of Farbtastic 2.0.0-alpha.1
 // Farbtastic was originally written by and (c) Steven Wittens (http://acko.net/)
 // It is licensed under the GPL, and available here: https://github.com/mattfarina/farbtastic
@@ -474,12 +475,7 @@
             return [h, s, l];
         };
 
-        // Parse options.
-        if (!options.callback) {
-            options = {
-                callback: options
-            };
-        }
+        // Parse options
         options = $.extend({
             width: 250,
             wheelWidth: (options.width || 250) / 10,
@@ -487,11 +483,6 @@
         }, options);
         
         // Set callback
-        if (!options.callback) {
-        if (typeof window.colorChange === 'function') {
-            options.callback = window.colorChange;  // Use global colorChange if it's a function
-        }
-    }
         fb.callback = options.callback;
 
         // Initialize.
