@@ -33,9 +33,7 @@
             $(container).data('farbtastic', farbInstance); // Store the new instance using jQuery's data method
         }
 
-        // If the returnInstance option is set, return the Farbtastic instance
-        // Otherwise, return the jQuery object for chaining
-        return (options && options.returnInstance) ? farbInstance : $(container);
+        return farbInstance;
     };
 
     $._farbtastic = function(container, options) {
