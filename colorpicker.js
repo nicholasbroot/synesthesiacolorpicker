@@ -41,30 +41,6 @@
 
         /////////////////////////////////////////////////////
 
-        /**
-         * Link to the given element(s) or callback.
-         */
-        fb.linkTo = function(callback) {
-            // Unon previous nodes
-            if (typeof fb.callback == 'object') {
-                $(fb.callback).off('keyup', fb.updateValue);
-            }
-
-            // Reset color
-            fb.color = null;
-
-            // Bind callback or elements
-            if (typeof callback == 'function') {
-                fb.callback = callback;
-            } else if (typeof callback == 'object' || typeof callback == 'string') {
-                fb.callback = $(callback);
-                fb.callback.on('keyup', fb.updateValue);
-                if (fb.callback[0].value) {
-                    fb.setColor(fb.callback[0].value);
-                }
-            }
-            return this;
-        }
         fb.updateValue = function(event) {
             if (this.value && this.value != fb.color) {
                 fb.setColor(this.value);
@@ -356,21 +332,8 @@
             // Draw markers
             fb.drawMarkers();
 
-            // Linked elements or callback
-            if (typeof fb.callback == 'object') {
-                // Set background/foreground color
-                $(fb.callback).css({
-                    backgroundColor: fb.color,
-                    color: fb.invert ? '#fff' : '#000'
-                });
-
-                // Change linked value
-                $(fb.callback).each(function() {
-                    if ((typeof this.value == 'string') && this.value != fb.color) {
-                        this.value = fb.color;
-                    }
-                }).trigger("change");
-            } else if (typeof fb.callback == 'function') {
+            // Callback
+            if (typeof fb.callback == 'function') {
                 fb.callback.call(fb, fb.color);
             }
         }
@@ -522,6 +485,14 @@
             wheelWidth: (options.width || 250) / 10,
             callback: null
         }, options);
+        
+        // Set callback
+        if (!options.callback) {
+        if (typeof window.colorChange === 'function') {
+            options.callback = window.colorChange;  // Use global colorChange if it's a function
+        }
+    }
+        fb.callback = options.callback;
 
         // Initialize.
         fb.initWidget();
@@ -529,12 +500,7 @@
         // Install mousedown handler (the others are set on the document on-demand)
         $('canvas.farbtastic-overlay', container).on('pointerdown', fb.mousedown);
 
-        // Set linked elements/callback
-        if (options.callback) {
-            fb.linkTo(options.callback);
-        }
-        // Set to random.
-        if (!fb.color) fb.setColor(fb.getRandomColor());
+        
     }
 
 })(jQuery);
