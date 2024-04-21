@@ -520,8 +520,8 @@
             };
         }
         options = $.extend({
-            width: 300,
-            wheelWidth: (options.width || 300) / 10,
+            width: 250,
+            wheelWidth: (options.width || 250) / 10,
             callback: null
         }, options);
 
