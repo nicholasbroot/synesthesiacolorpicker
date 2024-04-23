@@ -10,7 +10,8 @@ class CanvasTextDrawer {
             text: 'A', // Default text
             brushSize: 180, // Default brush size
             lineCap: "round", // Circular brush
-            lineJoin: "round" // Circular brush
+            lineJoin: "round", // Circular brush
+            callback: null
         };
 
         // Merge defaults with the provided options using the spread operator
@@ -43,7 +44,7 @@ class CanvasTextDrawer {
 
     paint() {
         this.context.stroke(); // Perform the actual drawing
-        canvasChange(); // Save the canvas to dataURL
+        this.callback.call(); // Trigger the onChange function callback
     }
 
     tool_pencil() {
