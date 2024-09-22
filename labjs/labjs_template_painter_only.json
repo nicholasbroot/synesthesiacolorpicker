@@ -1,0 +1,95 @@
+{
+  "components": {
+    "3": {
+      "id": "3",
+      "type": "lab.html.Screen",
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": "// Save the 'this' context\nconst _this = this;\n\n// This function is called every time the participant paints on the canvas\nconst canvasChange = () => {\n    // Update the third field to record the data URL of the canvas image.\n    _this.data.imgdat = painter.canvas.toDataURL(\"image/png\")\n}\n\n// Function to handle color changes\nconst colorChange = function(color) {\n  // Update the rectangle color\n  $('#rect').css('background', color);\n\n  // Set initial and currentcolor\n  _this.data.color_initial = function(_, value) {return value || color};\n  _this.data.color_final = color;\n\n  // Update the paintbrush to use the chosen color.\n  if (painter) {\n      painter.setColor(color);\n  }\n};\n\n// Initialize the brush size element.\ndocument.getElementById(\"brushsize\").addEventListener(\"input\", function() {\n    const newSize = parseInt(Math.pow(10, this.value / 44)); // Exponential scaling looks more natural\n    painter.setBrushSize(newSize);\n});\n\n// Initialize the painter\nvar painter = new CanvasTextDrawer('imageView', 'cursorC', {\n    font: \"150px Georgia\",\n    text: \"A\",\n    callback: canvasChange\n});\n\n// Initialize the color picker\nconst picker = $('#colorpicker1').farbtastic({\n    callback: colorChange,\n    width: 250, // Adjust if necessary\n    returnInstance: true\n});\n"
+        }
+      ],
+      "title": "ColorPicker Question",
+      "content": "<div style=\"width: 500px; height:250 px; display:flex; align-items:center; justify-content:center; margin: 0 auto;\">\n\n<div style=\"width:250px; height: 250px\">\n<div style=\"width: 250px; height:225 px; display:flex; align-items:center; justify-items:center;\">\n<div id=\"canvaswrapper\" style=\"position:relative; width:250px; height: 225px;\">\n\n<canvas id=\"imageView\" style=\"position: absolute!important; left: 0!important; top: 0!important; width: 250; height: 225; cursor: none;\" width=\"250\" height=\"225\">Unfortunately, your browser is currently unsupported by our web application. We are sorry for the inconvenience. Please use one the latest version of Chrome/Firefox/Safari, or email n.root@uva.nl for further instructions.</canvas>\n<canvas id=\"cursorC\" style=\"position: absolute!important; left: 0!important; top: 0!important; width: 250; height: 225; pointer-events:none\" width=\"250\" height=\"225\"></canvas>\n</div>\n</div>\n\n<div style=\"width: 250px; height: 25px; display: flex; align-items:center; justify-items:center;\">\n<input id=\"brushsize\" type=\"range\" value=\"100\" style=\"width:250px;\">\n</div>\n</div>\n\n<div style=\"width: 250px; display:flex; align-items:center; justify-content:center;\">\n<div id=\"colorpicker1\">&nbsp;</div>\n</div>\n\n</div>\n\n<div style=\"width: 500px; height:100 px; display:flex; align-content:center; justify-content:center; margin: 0 auto;\">\n\n<div style=\"width: 250px; height:100 px; display:flex; align-content:center; justify-content:center;\">\n<div style=\"width:150px; height:100px; display: flex; align-items:center; justify-content:center; text-align:center; font-size: 30px; padding: 10px;\">Brush Size</div>\n</div>\n\n<div style=\"width: 250px; height:100 px; display:flex; align-items:center; justify-content:center;\">\n<div style=\"width:150px; height:100px; display: flex; align-items:center; justify-content:center; text-align:right; font-size: 30px; padding: 10px;\">Current Color</div>\n<div id=\"rect\" style=\"background:#ff00ff; width:100px; height:100px;\">&nbsp;</div>\n</div>\n\n</div>",
+      "_tab": "Scripts",
+      "_template": false
+    },
+    "root": {
+      "id": "root",
+      "title": "root",
+      "type": "lab.flow.Sequence",
+      "children": [
+        "3"
+      ],
+      "parameters": [],
+      "plugins": [
+        {
+          "type": "lab.plugins.Metadata"
+        }
+      ],
+      "metadata": {
+        "title": "",
+        "description": "",
+        "repository": "",
+        "contributors": ""
+      }
+    }
+  },
+  "version": [
+    20,
+    2,
+    4
+  ],
+  "files": {
+    "files": {
+      "index.html": {
+        "content": "data:text/html,%3C!doctype%20html%3E%0A%3Chtml%3E%0A%3Chead%3E%0A%20%20%3Cmeta%20charset%3D%22utf-8%22%3E%0A%20%20%3Ctitle%3EExperiment%3C%2Ftitle%3E%0A%20%20%3C!--%20viewport%20setup%20--%3E%0A%20%20%3Cmeta%20name%3D%22viewport%22%20content%3D%22width%3Ddevice-width%2C%20initial-scale%3D1%22%3E%0A%20%20%3C!--%20Include%20jQuery%20--%3E%0A%20%20%3Cscript%20src%3D%22https%3A%2F%2Fcode.jquery.com%2Fjquery-3.6.0.min.js%22%3E%3C%2Fscript%3E%0A%20%20%3Cscript%20type%3D%22text%2Fjavascript%22%20src%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fnicholasbroot%2Fsynesthesiacolorpicker%2Fpainter.js%22%3E%3C%2Fscript%3E%0A%20%20%3C!--%20Include%20your%20custom%20color%20picker%20library%20--%3E%0A%20%20%3Cscript%20type%3D%22text%2Fjavascript%22%20src%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fnicholasbroot%2Fsynesthesiacolorpicker%2Fcolorpicker.js%22%3E%3C%2Fscript%3E%0A%20%20%3C!--%20lab.js%20library%20and%20experiment%20code%20--%3E%0A%20%20%24%7B%20header%20%7D%0A%3C%2Fhead%3E%0A%3Cbody%3E%0A%20%20%3C!--%20If%20you'd%20rather%20have%20a%20container%20with%20a%20fixed%20width%0A%20%20%20%20%20%20%20and%20variable%20height%2C%20try%20removing%20the%20fullscreen%20class%20below%20--%3E%0A%20%20%3Cdiv%20class%3D%22container%20fullscreen%22%20data-labjs-section%3D%22main%22%3E%0A%20%20%20%20%3Cmain%20class%3D%22content-vertical-center%20content-horizontal-center%22%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3Ch2%3ELoading%20Experiment%3C%2Fh2%3E%0A%20%20%20%20%20%20%20%20%3Cp%3EThe%20experiment%20is%20loading%20and%20should%20start%20in%20a%20few%20seconds%3C%2Fp%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fmain%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Fbody%3E%0A%3C%2Fhtml%3E%0A",
+        "source": "library"
+      },
+      "style.css": {
+        "content": "data:text/css,%2F*%20Please%20define%20your%20custom%20styles%20here%20*%2F",
+        "source": "library"
+      }
+    },
+    "bundledFiles": {
+      "lib/lab.js": {
+        "type": "application/javascript"
+      },
+      "lib/lab.js.map": {
+        "type": "text/plain"
+      },
+      "lib/lab.fallback.js": {
+        "type": "application/javascript"
+      },
+      "lib/lab.legacy.js": {
+        "type": "application/javascript"
+      },
+      "lib/lab.legacy.js.map": {
+        "type": "text/plain"
+      },
+      "lib/lab.css": {
+        "type": "text/css"
+      },
+      "lib/loading.svg": {
+        "type": "image/svg+xml"
+      }
+    }
+  }
+}

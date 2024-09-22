@@ -1,0 +1,633 @@
+{
+  "components": {
+    "1": {
+      "id": "1",
+      "type": "lab.flow.Sequence",
+      "children": [
+        "2",
+        "16"
+      ],
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "",
+          "code": ""
+        }
+      ],
+      "title": "Single Repetition",
+      "_tab": "Content"
+    },
+    "2": {
+      "id": "2",
+      "type": "lab.flow.Loop",
+      "children": [
+        "29"
+      ],
+      "templateParameters": {
+        "columns": [
+          {
+            "name": "letter",
+            "type": "string"
+          }
+        ],
+        "rows": [
+          [
+            "A"
+          ],
+          [
+            "B"
+          ],
+          [
+            "C"
+          ],
+          [
+            "D"
+          ],
+          [
+            "E"
+          ],
+          [
+            "F"
+          ],
+          [
+            "G"
+          ],
+          [
+            "H"
+          ],
+          [
+            "I"
+          ],
+          [
+            "J"
+          ],
+          [
+            "K"
+          ],
+          [
+            "L"
+          ],
+          [
+            "M"
+          ],
+          [
+            "N"
+          ],
+          [
+            "O"
+          ],
+          [
+            "P"
+          ],
+          [
+            "Q"
+          ],
+          [
+            "R"
+          ],
+          [
+            "S"
+          ],
+          [
+            "T"
+          ],
+          [
+            "U"
+          ],
+          [
+            "V"
+          ],
+          [
+            "W"
+          ],
+          [
+            "X"
+          ],
+          [
+            "Y"
+          ],
+          [
+            "Z"
+          ]
+        ]
+      },
+      "sample": {
+        "mode": "draw-shuffle"
+      },
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "",
+          "code": ""
+        }
+      ],
+      "title": "Colorpicker Trials Loop",
+      "_tab": "Content",
+      "_template": false
+    },
+    "3": {
+      "id": "3",
+      "type": "lab.html.Screen",
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": "// Save the 'this' context\nconst _this = this;\n\n// Function to handle color changes\nconst colorChange = function(color) {\n    // Update the rectangle and letter colors\n    $('#rect').css('background', color);\n    $('#letter').css('color', color);\n\n    // Record the selected color\n    _this.data.color_final = color;\n};\n\n// Initialize the color picker\nconst picker = $('#colorpicker1').farbtastic({\n    callback: colorChange,\n    width: 250, // Adjust if necessary\n    returnInstance: true\n});\n\n// Set initial color\n_this.data.color_initial = picker.color;\n_this.data.color_final = picker.color;\n\n// Show the \"Next\" button after a 1-second delay\nsetTimeout(function() {\n    $('#nextButton').show();\n}, 1000); // Delay in milliseconds (1000ms = 1 second)\n\n// Handle the Next button click\n$('#nextButton').on('click', function() {\n    // End the current screen and proceed\n    _this.end();\n});\n"
+        }
+      ],
+      "title": "ColorPicker Question",
+      "content": "<div style=\"width:250px; display:flex; align-content:center; justify-content:center; text-align:center; margin: 0 auto;\">\n    What is the best color for this letter?\n</div>\n<div style=\"width: 250px; height: 125px; display:flex; align-content:center; justify-content:center; margin: 0 auto; \">\n    <div style=\"width: 125px; display:flex; align-items:center; justify-content:center; overflow:hidden;\" id=\"stimulus\">\n        <span style=\"font-size:80px;\">\n            <font id=\"letter\">${ this.parameters.letter }</font>\n        </span>\n    </div>\n    <div style=\"width: 125px; display:flex; align-items:center; justify-content:center;\">\n        <div id=\"rect\" style=\"background:#ff00ff; width:100px; height:100px;\">\n            &nbsp;\n        </div>\n    </div>\n</div>\n<div style=\"width: 250px; margin: 0 auto;\">\n    <div id=\"colorpicker1\">&nbsp;</div>\n</div>\n<div style=\"width: 250px; margin: 0 auto; text-align: center;\">\n    <button id=\"nextButton\" style=\"display:none;\">Next</button>\n</div>\n\n",
+      "_tab": "Scripts",
+      "_template": false
+    },
+    "16": {
+      "id": "16",
+      "type": "lab.html.Screen",
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": "// Save the 'this' context\nconst _this = this;\n\n// Set the initial countdown time (in seconds)\nlet timeLeft = 10;\n\n// Update the countdown display immediately\n$('#countdown').text(timeLeft);\n\n// Function to update the countdown every second\nconst countdownTimer = setInterval(function() {\n    timeLeft--;\n\n    // Update the countdown display\n    $('#countdown').text(timeLeft);\n\n    // Check if time has run out\n    if (timeLeft <= 0) {\n        // Stop the countdown\n        clearInterval(countdownTimer);\n\n        // Show the \"Continue Study\" button\n        $('#continueButton').show();\n    }\n}, 1000); // Runs every 1000 milliseconds (1 second)\n\n// Handle the \"Continue Study\" button click\n$('#continueButton').on('click', function() {\n    // Proceed to the next component in the sequence\n    _this.end();\n});\n"
+        }
+      ],
+      "title": "Break",
+      "content": "<div style=\"width:600px; margin: 0 auto; text-align: center;\">\n    <p>YOUR BREAK TEXT HERE</p>\n    <p>The \"Continue Study\" button will appear in <span id=\"countdown\">10</span> seconds.</p>\n    <button id=\"continueButton\" style=\"display:none;\">Continue Study</button>\n</div>",
+      "_tab": "Content",
+      "skipCondition": "${ this.parameters.rep == \"3\" }",
+      "skip": false
+    },
+    "17": {
+      "id": "17",
+      "type": "lab.flow.Loop",
+      "children": [
+        "1"
+      ],
+      "templateParameters": {
+        "columns": [
+          {
+            "name": "rep",
+            "type": "string"
+          }
+        ],
+        "rows": [
+          [
+            "1"
+          ],
+          [
+            "2"
+          ],
+          [
+            "3"
+          ]
+        ]
+      },
+      "sample": {
+        "mode": "sequential"
+      },
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "",
+          "code": ""
+        }
+      ],
+      "title": "3x Repetition Loop",
+      "_tab": "Behavior"
+    },
+    "19": {
+      "id": "19",
+      "type": "lab.html.Screen",
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": "const _this = this;\n\n// Handle the \"Start Study\" button click\n$('#startButton').on('click', function() {\n    // Proceed to the next component in the sequence\n    _this.end();\n});"
+        }
+      ],
+      "title": "Instructions",
+      "_tab": "Content",
+      "content": "<div style=\"width:600px; margin: 0 auto; text-align: center;\">\n    <h2>Welcome to the Study</h2>\n    <p>YOUR INSTRUCTIONS HERE</p>\n    <button id=\"startButton\">Start Study</button>\n</div>\n",
+      "tardy": false,
+      "skipCondition": ""
+    },
+    "22": {
+      "id": "22",
+      "type": "lab.flow.Sequence",
+      "children": [
+        "19",
+        "17",
+        "24"
+      ],
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "before:prepare",
+          "code": "this.state.consent = this.options.datastore.get('consent');"
+        }
+      ],
+      "title": "Experiment",
+      "_collapsed": false,
+      "_tab": "Behavior",
+      "skipCondition": "${ this.state.consent === 'no' }",
+      "tardy": true
+    },
+    "24": {
+      "id": "24",
+      "type": "lab.html.Screen",
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": "// Save the 'this' context\nconst _this = this;\n\n// Handle the Next button click\n$('#finishButton').on('click', function() {\n   // End the experiment\n    _this.end();\n\n});\n"
+        }
+      ],
+      "title": "Debrief Text",
+      "content": "<div style=\"width:600px; margin: 0 auto; text-align: center;\">\n    <h2>Thank you for your participation!</h2>\n    <p>YOUR DEBRIEF TEXT HERE</p>\n    <button id=\"finishButton\">Claim Experimental Credit</button>\n</div>\n",
+      "_tab": "Content"
+    },
+    "25": {
+      "id": "25",
+      "type": "lab.html.Form",
+      "content": "<div style=\"width:600px; margin: 0 auto; text-align: left;\">\n    <h2>Informed Consent</h2>\n    <p>YOUR CONSENT HERE</p>\n    <p>Please indicate your choice below:</p>\n    <form id=\"consentForm\">\n        <input type=\"radio\" id=\"consentYes\" name=\"consent\" value=\"yes\">\n        <label for=\"consentYes\">I consent to participate in this study.</label><br><br>\n        <input type=\"radio\" id=\"consentNo\" name=\"consent\" value=\"no\">\n        <label for=\"consentNo\">I do not consent to participate in this study.</label><br><br>\n        <button id=\"consentButton\" disabled>Next</button>\n    </form>\n</div>\n",
+      "scrollTop": true,
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": "// Save the 'this' context\nconst _this = this;\n\n// Enable the \"Next\" button when a consent option is selected\n$('input[name=\"consent\"]').on('change', function() {\n    $('#consentButton').prop('disabled', false);\n});\n\n// Handle the \"Next\" button click\n$('#consentButton').on('click', function(event) {\n    event.preventDefault(); // Prevent form submission\n\n    // Get the selected consent value\n    const consent = $('input[name=\"consent\"]:checked').val();\n    _this.options.datastore.set('consent', consent);\n\n    // End the current screen\n    _this.end();\n});\n"
+        }
+      ],
+      "title": "Consent Form",
+      "_tab": "Content"
+    },
+    "26": {
+      "id": "26",
+      "type": "lab.flow.Sequence",
+      "children": [
+        "25",
+        "27",
+        "22"
+      ],
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": ""
+        }
+      ],
+      "title": "Experiment Wrapper",
+      "_tab": "Scripts"
+    },
+    "27": {
+      "id": "27",
+      "type": "lab.html.Screen",
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "before:prepare",
+          "code": "this.state.consent = this.options.datastore.get('consent');"
+        }
+      ],
+      "title": "No Consent",
+      "content": "<div style=\"width:600px; margin: 0 auto; text-align: left;\">\n    <h2>Study Terminated</h2>\n    <p>YOUR NO CONSENT TEXT HERE</p>\n</div>\n",
+      "_tab": "Content",
+      "skipCondition": "${ this.state.consent === 'yes' }",
+      "tardy": true
+    },
+    "29": {
+      "id": "29",
+      "type": "lab.flow.Sequence",
+      "children": [
+        "31",
+        "32",
+        "3"
+      ],
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "",
+          "code": ""
+        }
+      ],
+      "title": "Single Trial",
+      "_tab": "Behavior"
+    },
+    "31": {
+      "id": "31",
+      "type": "lab.html.Form",
+      "content": "<div style=\"width:600px; margin: 0 auto; text-align: left;\">\n    <p>Which of the following statements best describes your color experience(s) for the letter ${ this.parameters.letter }?</p>\n    <form id=\"subjectiveExp\">\n        <input type=\"radio\" id=\"ncolor_0\" name=\"ncolor\" value=\"0\">\n        <label for=\"ncolor_0\">I do not experience a color when I see the letter ${ this.parameters.letter } (I see only the color in which it is printed)</label><br><br>\n        <input type=\"radio\" id=\"ncolor_1\" name=\"ncolor\" value=\"1\">\n        <label for=\"ncolor_1\">I experience a color when I see the letter ${ this.parameters.letter } (in addition to the color in which it is printed)</label><br><br>\n        <input type=\"radio\" id=\"ncolor_2\" name=\"ncolor\" value=\"2\">\n        <label for=\"ncolor_2\">I experience more than one color when I see the letter ${ this.parameters.letter } (in addition to the color in which it is printed)</label><br><br>\n        <button id=\"nextButton\" disabled>Next</button>\n    </form>\n</div>\n",
+      "scrollTop": true,
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": "// Save the 'this' context\nconst _this = this;\n\n// Enable the \"Next\" button when a ncolor option is selected\n$('input[name=\"ncolor\"]').on('change', function() {\n    $('#nextButton').prop('disabled', false);\n});\n\n// Handle the \"Next\" button click\n$('#nextButton').on('click', function(event) {\n    event.preventDefault(); // Prevent form submission\n\n    // Record the selected color\n    const ncolor = $('input[name=\"ncolor\"]:checked').val();\n    _this.data.ncolor = ncolor;\n    _this.state.ncolor = ncolor; // Record to state for branching logic\n\n    // End the current screen\n    _this.end();\n});\n"
+        }
+      ],
+      "title": "Subjective Experience",
+      "_tab": "Behavior",
+      "skipCondition": "${ this.parameters.rep != \"1\" }"
+    },
+    "32": {
+      "id": "32",
+      "type": "lab.html.Form",
+      "content": "<div style=\"width:600px; margin: 0 auto; text-align: left;\">\n    <p>Please describe your multi-colored experience(s) for the letter ${ this.parameters.letter }:</p>\n    <form id=\"multiColor\">\n        <textarea id=\"multiColorExp\" name=\"multiColorExp\" rows=\"10\" cols=\"50\" placeholder=\"Write your answer here...\"></textarea><br><br>\n        <button id=\"nextButton\" disabled>Next</button>\n    </form>\n</div>\n",
+      "scrollTop": true,
+      "files": [],
+      "responses": [
+        {
+          "label": "",
+          "event": "",
+          "target": "",
+          "filter": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "",
+          "value": "",
+          "type": "string"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "title": "",
+          "message": "run",
+          "code": "// Save the 'this' context\nconst _this = this;\n\n// Enable the \"Next\" button when text is typed\n$('#multiColorExp').on('input', function() {\n    $('#nextButton').prop('disabled', false);\n});\n\n// Handle the \"Next\" button click\n$('#nextButton').on('click', function(event) {\n    event.preventDefault(); // Prevent form submission\n\n    // Record the text\n    const multiColorExp = $('#multiColorExp').val();\n    _this.data.multiColorExp = multiColorExp;\n\n    // End the current screen\n    _this.end();\n});\n"
+        }
+      ],
+      "title": "Multicolor Textbox",
+      "_tab": "Behavior",
+      "skipCondition": "${ (this.parameters.rep != \"1\") || (this.state.ncolor != \"2\") }",
+      "tardy": true
+    },
+    "root": {
+      "id": "root",
+      "title": "root",
+      "type": "lab.flow.Sequence",
+      "children": [
+        "26"
+      ],
+      "parameters": [],
+      "plugins": [
+        {
+          "type": "lab.plugins.Metadata"
+        }
+      ],
+      "metadata": {
+        "title": "",
+        "description": "",
+        "repository": "",
+        "contributors": ""
+      }
+    }
+  },
+  "version": [
+    20,
+    2,
+    4
+  ],
+  "files": {
+    "files": {
+      "index.html": {
+        "content": "data:text/html,%3C!doctype%20html%3E%0A%3Chtml%3E%0A%3Chead%3E%0A%20%20%3Cmeta%20charset%3D%22utf-8%22%3E%0A%20%20%3Ctitle%3EExperiment%3C%2Ftitle%3E%0A%20%20%3C!--%20viewport%20setup%20--%3E%0A%20%20%3Cmeta%20name%3D%22viewport%22%20content%3D%22width%3Ddevice-width%2C%20initial-scale%3D1%22%3E%0A%20%20%3C!--%20Include%20jQuery%20--%3E%0A%20%20%3Cscript%20src%3D%22https%3A%2F%2Fcode.jquery.com%2Fjquery-3.6.0.min.js%22%3E%3C%2Fscript%3E%0A%20%20%3C!--%20Include%20your%20custom%20color%20picker%20library%20--%3E%0A%20%20%3Cscript%20type%3D%22text%2Fjavascript%22%20src%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fnicholasbroot%2Fsynesthesiacolorpicker%2Fcolorpicker.js%22%3E%3C%2Fscript%3E%0A%20%20%3C!--%20lab.js%20library%20and%20experiment%20code%20--%3E%0A%20%20%24%7B%20header%20%7D%0A%3C%2Fhead%3E%0A%3Cbody%3E%0A%20%20%3C!--%20If%20you'd%20rather%20have%20a%20container%20with%20a%20fixed%20width%0A%20%20%20%20%20%20%20and%20variable%20height%2C%20try%20removing%20the%20fullscreen%20class%20below%20--%3E%0A%20%20%3Cdiv%20class%3D%22container%20fullscreen%22%20data-labjs-section%3D%22main%22%3E%0A%20%20%20%20%3Cmain%20class%3D%22content-vertical-center%20content-horizontal-center%22%3E%0A%20%20%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3Ch2%3ELoading%20Experiment%3C%2Fh2%3E%0A%20%20%20%20%20%20%20%20%3Cp%3EThe%20experiment%20is%20loading%20and%20should%20start%20in%20a%20few%20seconds%3C%2Fp%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fmain%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Fbody%3E%0A%3C%2Fhtml%3E%0A",
+        "source": "library"
+      },
+      "style.css": {
+        "content": "data:text/css,%2F*%20Please%20define%20your%20custom%20styles%20here%20*%2F",
+        "source": "library"
+      }
+    },
+    "bundledFiles": {
+      "lib/lab.js": {
+        "type": "application/javascript"
+      },
+      "lib/lab.js.map": {
+        "type": "text/plain"
+      },
+      "lib/lab.fallback.js": {
+        "type": "application/javascript"
+      },
+      "lib/lab.legacy.js": {
+        "type": "application/javascript"
+      },
+      "lib/lab.legacy.js.map": {
+        "type": "text/plain"
+      },
+      "lib/lab.css": {
+        "type": "text/css"
+      },
+      "lib/loading.svg": {
+        "type": "image/svg+xml"
+      }
+    }
+  }
+}
