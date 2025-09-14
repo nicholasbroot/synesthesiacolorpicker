@@ -1033,7 +1033,8 @@
                "QuestionDescriptionOption":"UseText",
                "MinSeconds":10,
                "MaxSeconds":"0",
-               "ShowTimer":true
+               "ShowTimer":true,
+               "Seconds":10
             },
             "QuestionDescription":"Timing",
             "Choices":{
@@ -1120,7 +1121,8 @@
                "QuestionDescriptionOption":"UseText",
                "MinSeconds":10,
                "MaxSeconds":"0",
-               "ShowTimer":true
+               "ShowTimer":true,
+               "Seconds":10
             },
             "QuestionDescription":"Timing",
             "Choices":{
@@ -1269,9 +1271,9 @@
             "DisplayLogic":{
                "0":{
                   "0":{
-                     "ChoiceLocator":"q:\/\/QID32\/SelectableChoice\/2",
+                     "ChoiceLocator":"q:\/\/QID32\/SelectableChoice\/3",
                      "Description":"<span class=\"ConjDesc\">If<\/span> <span class=\"QuestionDesc\">Which of the following statements best describes your color experience(s) for the letter ${lm:\/\/Field\/1}?<\/span> <span class=\"LeftOpDesc\">I experience more than one color when I see the letter ${lm:\/\/Field\/1} (in addition to the color in which it is printed)<\/span> <span class=\"OpDesc\">Is Selected<\/span> ",
-                     "LeftOperand":"q:\/\/QID32\/SelectableChoice\/2",
+                     "LeftOperand":"q:\/\/QID32\/SelectableChoice\/3",
                      "LogicType":"Question",
                      "LoopAndMergeLoops":"current",
                      "LoopTarget":"none",
