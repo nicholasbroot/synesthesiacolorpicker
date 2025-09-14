@@ -1,0 +1,509 @@
+{
+   "SurveyEntry":{
+      "SurveyID":"SV_dgpCm81QmeX5yzY",
+      "SurveyName":"qualtrics_template_piping_example",
+      "SurveyDescription":null,
+      "SurveyOwnerID":"UR_51oKL7TndyLc2AS",
+      "SurveyBrandID":"uva",
+      "DivisionID":"DV_9MEH7xRrHd6AifH",
+      "SurveyLanguage":"EN",
+      "SurveyActiveResponseSet":"RS_abh8Aq2zlKTlYEu",
+      "SurveyStatus":"Active",
+      "SurveyStartDate":"0000-00-00 00:00:00",
+      "SurveyExpirationDate":"0000-00-00 00:00:00",
+      "SurveyCreationDate":"2025-09-14 04:18:06",
+      "CreatorID":"UR_51oKL7TndyLc2AS",
+      "LastModified":"2025-09-14 04:28:52",
+      "LastAccessed":"0000-00-00 00:00:00",
+      "LastActivated":"2025-09-14 04:28:52",
+      "Deleted":null
+   },
+   "SurveyElements":[
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"BL",
+         "PrimaryAttribute":"Survey Blocks",
+         "SecondaryAttribute":null,
+         "TertiaryAttribute":null,
+         "Payload":{
+            "0":{
+               "Type":"Default",
+               "Description":"ColorPicker R1",
+               "ID":"BL_9GqWZrC1BvksZAq",
+               "BlockElements":[
+                  {
+                     "Type":"Question",
+                     "QuestionID":"QID15"
+                  },
+                  {
+                     "Type":"Question",
+                     "QuestionID":"QID35"
+                  }
+               ],
+               "Options":{
+                  "BlockLocking":"false",
+                  "RandomizeQuestions":"false",
+                  "Looping":"Static",
+                  "LoopingOptions":{
+                     "Static":{
+                        "1":{
+                           "1":"A"
+                        },
+                        "2":{
+                           "1":"B"
+                        },
+                        "3":{
+                           "1":"C"
+                        }
+                     },
+                     "Randomization":"All"
+                  },
+                  "BlockVisibility":"Expanded"
+               }
+            },
+            "1":{
+               "Type":"Trash",
+               "Description":"Trash \/ Unused Questions",
+               "ID":"BL_7X3VVpmSclcrJxc",
+               "BlockElements":[
+                  
+               ]
+            },
+            "8":{
+               "Type":"Standard",
+               "SubType":"",
+               "Description":"Correct\/Incorrect",
+               "ID":"BL_6yy0iDMfxcRIofQ",
+               "BlockElements":[
+                  {
+                     "Type":"Question",
+                     "QuestionID":"QID31"
+                  }
+               ],
+               "Options":{
+                  "BlockLocking":"false",
+                  "RandomizeQuestions":"false",
+                  "BlockVisibility":"Expanded",
+                  "Looping":"Static",
+                  "LoopingOptions":{
+                     "Static":{
+                        "1":{
+                           "1":"A",
+                           "2":"${q:\/\/1_QID15\/ChoiceTextEntryValue\/1}"
+                        },
+                        "2":{
+                           "1":"B",
+                           "2":"${q:\/\/2_QID15\/ChoiceTextEntryValue\/1}"
+                        },
+                        "3":{
+                           "1":"C",
+                           "2":"${q:\/\/3_QID15\/ChoiceTextEntryValue\/1}"
+                        },
+                        "4":{
+                           "1":"A",
+                           "2":"${q:\/\/3_QID15\/ChoiceTextEntryValue\/1}"
+                        },
+                        "5":{
+                           "1":"B",
+                           "2":"${q:\/\/1_QID15\/ChoiceTextEntryValue\/1}"
+                        },
+                        "6":{
+                           "1":"C",
+                           "2":"${q:\/\/2_QID15\/ChoiceTextEntryValue\/1}"
+                        }
+                     },
+                     "Randomization":"All"
+                  }
+               }
+            }
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"FL",
+         "PrimaryAttribute":"Survey Flow",
+         "SecondaryAttribute":null,
+         "TertiaryAttribute":null,
+         "Payload":{
+            "Type":"Root",
+            "FlowID":"FL_1",
+            "Flow":[
+               {
+                  "Type":"EmbeddedData",
+                  "FlowID":"FL_6",
+                  "EmbeddedData":[
+                     {
+                        "Description":"chosenColorTemp",
+                        "Type":"Recipient",
+                        "Field":"chosenColorTemp",
+                        "VariableType":"String",
+                        "DataVisibility":[
+                           
+                        ],
+                        "AnalyzeText":false
+                     },
+                     {
+                        "Description":"id",
+                        "Type":"Recipient",
+                        "Field":"id",
+                        "VariableType":"String",
+                        "DataVisibility":[
+                           
+                        ],
+                        "AnalyzeText":false
+                     }
+                  ]
+               },
+               {
+                  "Type":"Branch",
+                  "FlowID":"FL_18",
+                  "Description":"New Branch",
+                  "BranchLogic":{
+                     "0":{
+                        "0":{
+                           "LogicType":"Question",
+                           "QuestionID":"QID23",
+                           "QuestionIsInLoop":"no",
+                           "ChoiceLocator":"q:\/\/QID23\/SelectableChoice\/2",
+                           "Operator":"Selected",
+                           "QuestionIDFromLocator":"QID23",
+                           "LeftOperand":"q:\/\/QID23\/SelectableChoice\/2",
+                           "Type":"Expression",
+                           "Description":"<span class=\"ConjDesc\">If<\/span> <span class=\"QuestionDesc\">YOUR CONSENT FORM HERE<\/span> <span class=\"LeftOpDesc\">I do not consent to participate<\/span> <span class=\"OpDesc\">Is Selected<\/span> "
+                        },
+                        "Type":"If"
+                     },
+                     "Type":"BooleanExpression"
+                  },
+                  "Flow":[
+                     {
+                        "Type":"EndSurvey",
+                        "FlowID":"FL_19"
+                     }
+                  ]
+               },
+               {
+                  "Type":"Block",
+                  "ID":"BL_9GqWZrC1BvksZAq",
+                  "FlowID":"FL_2",
+                  "Autofill":[
+                     
+                  ]
+               },
+               {
+                  "Type":"Standard",
+                  "ID":"BL_6yy0iDMfxcRIofQ",
+                  "FlowID":"FL_20",
+                  "Autofill":[
+                     
+                  ]
+               }
+            ],
+            "Properties":{
+               "Count":20
+            }
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"PL",
+         "PrimaryAttribute":"Preview Link",
+         "SecondaryAttribute":null,
+         "TertiaryAttribute":null,
+         "Payload":{
+            "PreviewType":"Brand",
+            "PreviewID":"192126d4-63ed-43ee-9897-c75cdc1a78ee"
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"PROJ",
+         "PrimaryAttribute":"CORE",
+         "SecondaryAttribute":null,
+         "TertiaryAttribute":"1.1.0",
+         "Payload":{
+            "ProjectCategory":"CORE",
+            "SchemaVersion":"1.1.0"
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"QC",
+         "PrimaryAttribute":"Survey Question Count",
+         "SecondaryAttribute":"38",
+         "TertiaryAttribute":null,
+         "Payload":null
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"RS",
+         "PrimaryAttribute":"RS_abh8Aq2zlKTlYEu",
+         "SecondaryAttribute":null,
+         "TertiaryAttribute":null,
+         "Payload":null
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"SCO",
+         "PrimaryAttribute":"Scoring",
+         "SecondaryAttribute":null,
+         "TertiaryAttribute":null,
+         "Payload":{
+            "ScoringCategories":[
+               
+            ],
+            "ScoringCategoryGroups":[
+               
+            ],
+            "ScoringSummaryCategory":null,
+            "ScoringSummaryAfterQuestions":0,
+            "ScoringSummaryAfterSurvey":0,
+            "DefaultScoringCategory":null,
+            "AutoScoringCategory":null
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"SO",
+         "PrimaryAttribute":"Survey Options",
+         "SecondaryAttribute":null,
+         "TertiaryAttribute":null,
+         "Payload":{
+            "BackButton":"false",
+            "SaveAndContinue":"true",
+            "SurveyProtection":"PublicSurvey",
+            "BallotBoxStuffingPrevention":"false",
+            "NoIndex":"Yes",
+            "SecureResponseFiles":"true",
+            "SurveyExpiration":null,
+            "SurveyTermination":"DefaultMessage",
+            "Header":"<script type=\"javascript\" src=\"https:\/\/cdn.jsdelivr.net\/gh\/nicholasbroot\/synesthesiacolorpicker\/colorpicker.js\"><\/script>\n\n<script>\nQualtrics.SurveyEngine.addOnload(function()\n{\njQuery('.QuestionOuter').css('visibility','hidden')\n});\n\n\nQualtrics.SurveyEngine.addOnReady(function()\n{\njQuery('.QuestionOuter').css('visibility','visible')\n});\n<\/script>",
+            "Footer":"",
+            "ProgressBarDisplay":"None",
+            "PartialData":"+1 week",
+            "ValidationMessage":null,
+            "PreviousButton":" \u2190 ",
+            "NextButton":" \u2192 ",
+            "SurveyTitle":"Online Survey Software | Qualtrics Survey Solutions",
+            "SkinLibrary":"uva",
+            "SkinType":"templated",
+            "Skin":{
+               "brandingId":null,
+               "templateId":"*base",
+               "overrides":{
+                  "font":{
+                     "family":"georgia, serif"
+                  }
+               }
+            },
+            "NewScoring":1,
+            "ShowExportTags":"false",
+            "CollectGeoLocation":"false",
+            "SurveyMetaDescription":"The most powerful, simple and trusted way to gather experience data. Start your journey to experience management and try a free account today.",
+            "PasswordProtection":"No",
+            "AnonymizeResponse":"No",
+            "Password":"",
+            "RefererCheck":"No",
+            "RefererURL":"http:\/\/",
+            "BallotBoxStuffingPreventionBehavior":null,
+            "BallotBoxStuffingPreventionMessage":null,
+            "BallotBoxStuffingPreventionMessageLibrary":null,
+            "BallotBoxStuffingPreventionURL":null,
+            "RecaptchaV3":"false",
+            "ConfirmStart":false,
+            "AutoConfirmStart":false,
+            "UseCustomSurveyLinkCompletedMessage":null,
+            "SurveyLinkCompletedMessage":"",
+            "SurveyLinkCompletedMessageLibrary":"",
+            "ResponseSummary":"No",
+            "EOSRedirectURL":"https:\/\/",
+            "EmailThankYou":"false",
+            "ThankYouEmailMessageLibrary":null,
+            "ThankYouEmailMessage":null,
+            "ValidateMessage":"false",
+            "ValidationMessageLibrary":null,
+            "InactiveSurvey":"DefaultMessage",
+            "PartialDeletion":null,
+            "PartialDataCloseAfter":"LastActivity",
+            "ActiveResponseSet":null,
+            "InactiveMessageLibrary":"",
+            "InactiveMessage":"",
+            "AvailableLanguages":{
+               "EN":[
+                  
+               ]
+            },
+            "headerMid":"",
+            "SurveyAnalysisDisabled":true,
+            "CustomStyles":{
+               "customCSS":".JFEScope .Skin .q-slider ul {    \n    padding: 10px;   \n}\n.JFEScope .Skin .q-slider .statement-container {    display: none; }"
+            }
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"SQ",
+         "PrimaryAttribute":"QID15",
+         "SecondaryAttribute":"What is the best color for this letter? ${lm:\/\/Field\/1} \u00a0 \u00a0",
+         "TertiaryAttribute":null,
+         "Payload":{
+            "QuestionText":"<div style=\"width:250px; display:flex; align-content:center; justify-content:center; text-align:center; margin: 0 auto;\">\n    What is the best color for this letter?<\/div>\n<div style=\"width: 250px; height: 125px; display:flex; align-content:center; justify-content:center; margin: 0 auto; \">\n    <div style=\"width: 125px; display:flex; align-items:center; justify-content:center; overflow:hidden;\" id=\"stimulus\"><span style=\"font-size:80px;\">\n            <font id=\"letter\">${lm:\/\/Field\/1}<\/font>\n        <\/span><\/div>\n    <div style=\"width: 125px; display:flex; align-items:center; justify-content:center;\">\n        <div id=\"rect\" style=\"background:#ff00ff; width:100px; height:100px;\">\n            &nbsp;<\/div>\n    <\/div>\n<\/div>\n<div style=\"width: 250px; margin: 0 auto;\">\n    <div id=\"colorpicker1\">&nbsp;<\/div>\n<\/div>",
+            "QuestionJS":"Qualtrics.SurveyEngine.addOnReady(function() {\n\n    \/\/ This function is called every time the participant changes the color\n    const colorChange = (color) => {\n\n        \/\/ Update the first field to record the newly chosen color. \n        jQuery(\"#\" + this.questionId + \" input[type=text]:eq(0)\").val(color);\n\n        \/\/ Update the colorpicker rectangle to display the chosen color.\n        jQuery(\"#rect\").css('background', color);\n\n        \/\/ Update the color of the letter stimulus to display the chosen color\n        \/\/ This can be removed if you don't display anything (e.g. sound synesthesias)\n        \/\/ You can also add additional lines here if you want to change the color of multiple things on screen.\n        jQuery(\"#letter\").css('color', color);\n    }\n\n    \/\/ Hide the form boxes (they are populated automatically, we don't want the participant to see)\n    jQuery(\"#\" + this.questionId + \" .QuestionBody\").hide();\n    \/\/ Initialize the color picker. \n    var picker = jQuery('#colorpicker1').farbtastic({\n        callback: colorChange,\n\t\twidth: 250, \/\/This can be changed if you are comfortable with CSS\/HTML\n        returnInstance: true\n    });\n    \/\/ Record the initial color. \n    jQuery(\"#\" + this.questionId + \" input[type=text]:eq(1)\").val(picker.color);\n\n\n});",
+            "DefaultChoices":false,
+            "DataExportTag":"ColorPick_R1_Color",
+            "QuestionType":"TE",
+            "Selector":"FORM",
+            "DataVisibility":{
+               "Private":false,
+               "Hidden":false
+            },
+            "Configuration":{
+               "QuestionDescriptionOption":"UseText",
+               "InputWidth":451,
+               "InputHeight":29
+            },
+            "QuestionDescription":"What is the best color for this letter? ${lm:\/\/Field\/1} \u00a0 \u00a0",
+            "Validation":{
+               "Settings":{
+                  "ForceResponse":"OFF"
+               }
+            },
+            "GradingData":[
+               
+            ],
+            "Language":[
+               
+            ],
+            "NextChoiceId":10,
+            "NextAnswerId":1,
+            "SearchSource":{
+               "AllowFreeResponse":"false"
+            },
+            "QuestionID":"QID15",
+            "Choices":{
+               "1":{
+                  "Display":"ChosenColor",
+                  "TextEntry":"on",
+                  "InputHeight":29,
+                  "InputWidth":300
+               },
+               "2":{
+                  "Display":"InitialColor"
+               }
+            },
+            "ChoiceOrder":[
+               "1",
+               "2"
+            ]
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"SQ",
+         "PrimaryAttribute":"QID31",
+         "SecondaryAttribute":"Does this letter have the correct color? ${lm:\/\/Field\/1}",
+         "TertiaryAttribute":null,
+         "Payload":{
+            "QuestionText":"<div style=\"width:500px; display:flex; align-content:center; justify-content:center; text-align:center; margin: 0 auto;\">Does this letter have the correct color?<\/div>\n\n<div style=\"width: 250px; height: 125px; display:flex; align-content:center; justify-content:center; margin: 0 auto; \">\n    <div style=\"width: 250px; display:flex; align-items:center; justify-content:center; overflow:hidden;\" id=\"stimulus\"><span style=\"font-size:80px; color: ${lm:\/\/Field\/2}\">${lm:\/\/Field\/1} <\/span><\/div>\n<\/div>",
+            "DefaultChoices":false,
+            "DataExportTag":"correct_color",
+            "QuestionID":"QID31",
+            "QuestionType":"MC",
+            "Selector":"SAVR",
+            "SubSelector":"TX",
+            "DataVisibility":{
+               "Private":false,
+               "Hidden":false
+            },
+            "Configuration":{
+               "QuestionDescriptionOption":"UseText"
+            },
+            "QuestionDescription":"Does this letter have the correct color? ${lm:\/\/Field\/1}",
+            "Choices":{
+               "1":{
+                  "Display":"Yes"
+               },
+               "2":{
+                  "Display":"No"
+               }
+            },
+            "ChoiceOrder":[
+               1,
+               2
+            ],
+            "Validation":{
+               "Settings":{
+                  "ForceResponse":"OFF",
+                  "Type":"None"
+               }
+            },
+            "GradingData":[
+               
+            ],
+            "Language":[
+               
+            ],
+            "NextChoiceId":3,
+            "NextAnswerId":1
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"SQ",
+         "PrimaryAttribute":"QID35",
+         "SecondaryAttribute":"Timing",
+         "TertiaryAttribute":null,
+         "Payload":{
+            "QuestionText":"Timing",
+            "DefaultChoices":false,
+            "DataExportTag":"ColorPick_R1_Timing",
+            "QuestionID":"QID35",
+            "QuestionType":"Timing",
+            "Selector":"PageTimer",
+            "DataVisibility":{
+               "Private":false,
+               "Hidden":false
+            },
+            "Configuration":{
+               "QuestionDescriptionOption":"UseText",
+               "MinSeconds":2,
+               "MaxSeconds":"0"
+            },
+            "QuestionDescription":"Timing",
+            "Choices":{
+               "1":{
+                  "Display":"First Click"
+               },
+               "2":{
+                  "Display":"Last Click"
+               },
+               "3":{
+                  "Display":"Page Submit"
+               },
+               "4":{
+                  "Display":"Click Count"
+               }
+            },
+            "GradingData":[
+               
+            ],
+            "Language":[
+               
+            ],
+            "NextChoiceId":28,
+            "NextAnswerId":1
+         }
+      },
+      {
+         "SurveyID":"SV_dgpCm81QmeX5yzY",
+         "Element":"STAT",
+         "PrimaryAttribute":"Survey Statistics",
+         "SecondaryAttribute":null,
+         "TertiaryAttribute":null,
+         "Payload":{
+            "MobileCompatible":true,
+            "ID":"Survey Statistics"
+         }
+      }
+   ]
+}

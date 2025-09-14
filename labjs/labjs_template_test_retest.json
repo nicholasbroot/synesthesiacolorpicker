@@ -436,7 +436,7 @@
         }
       ],
       "title": "Experiment Wrapper",
-      "_tab": "Scripts"
+      "_tab": "Content"
     },
     "27": {
       "id": "27",
@@ -602,7 +602,7 @@
         "source": "library"
       },
       "style.css": {
-        "content": "data:text/css,%2F*%20Please%20define%20your%20custom%20styles%20here%20*%2F",
+        "content": "data:text/css,%2F*%20Please%20define%20your%20custom%20styles%20here%20*%2F%0A%0Abody%7Bfont-family%3A%20serif%3B%7D",
         "source": "library"
       }
     },
